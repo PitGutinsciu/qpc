@@ -118,6 +118,20 @@ make -j8 -f %MAKEFILE% LOG=. OPT=cx USB=%1/ flash
 if %ERRORLEVEL% neq 0 goto err
 copy /b/y %LOGDIR%\log_%TRG%.txt + *.log %LOGDIR%\%TEST%-%TRG%.%LOGEXT%
 
+set TEST=TUN_QP_qv
+cd %TESTDIR%\%TEST%\test\%TRG%
+del *.log *.cov
+make -j8 -f %MAKEFILE% LOG=. OPT=cx USB=%1/ flash
+if %ERRORLEVEL% neq 0 goto err
+copy /b/y %LOGDIR%\log_%TRG%.txt + *.log %LOGDIR%\%TEST%-%TRG%.%LOGEXT%
+
+set TEST=TUN_QP_qk
+cd %TESTDIR%\%TEST%\test\%TRG%
+del *.log *.cov
+make -j8 -f %MAKEFILE% LOG=. OPT=cx USB=%1/ flash
+if %ERRORLEVEL% neq 0 goto err
+copy /b/y %LOGDIR%\log_%TRG%.txt + *.log %LOGDIR%\%TEST%-%TRG%.%LOGEXT%
+
 :: integration tests =========================================================
 set TEST=TIN_QP_mem
 cd %TESTDIR%\%TEST%\test_mem\%TRG%
